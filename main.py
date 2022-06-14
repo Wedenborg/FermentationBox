@@ -52,7 +52,9 @@ def signalHumidifier(humid):
 setup(BlaaTemp,BrunTemp,Humid,Sensor)
 
 try:
+    humidifier = False
     while True:
+        
         humidity, temperature = Adafruit_DHT.read_retry(11, Sensor)
         f = open('/home/emilie/Desktop/Code/test.csv', 'a')
         f.write(str(temperature) + ',' + str(humidity) + ',' + str(datetime.now().strftime("%H:%M:%S")) + '\n')
@@ -64,12 +66,14 @@ try:
         else:
             heatmatOFF(BlaaTemp,BrunTemp)
         
-        if humidity < 70:
+        if humidity < 70 and humidifier == False:
             signalHumidifier(Humid)
-        else:
+            humidifier = True
+        elif humidity > 70 and humidifier == True:
             signalHumidifier(Humid)
+            humidifier = False
 
-        sleep(60)
+        sleep(120)
 
 except KeyboardInterrupt:
     heatmatOFF(BlaaTemp,BrunTemp)
