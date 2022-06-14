@@ -45,10 +45,11 @@ def heatmatOFF(temp1,temp2):
 def signalHumidifier(humid):
     # Function that turns the humidifier on or off
     GPIO.output(Humid, GPIO.LOW)
+    sleep(1)
     GPIO.output(Humid, GPIO.HIGH)
     return
 
-
+setup(BlaaTemp,BrunTemp,Humid,Sensor)
 
 try:
     while True:
@@ -69,6 +70,11 @@ try:
             signalHumidifier(Humid)
 
         sleep(60)
+
+except KeyboardInterrupt:
+    heatmatOFF(BlaaTemp,BrunTemp)
+    if humidity < 70:
+        signalHumidifier(Humid)
 
 except:
     heatmatOFF(BlaaTemp,BrunTemp)
