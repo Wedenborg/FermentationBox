@@ -22,6 +22,21 @@ Fermentation box inspired by Noma Guide to Fermentation.
 * More complicated/efficient control system
 
 
+### Modify rc.local to run on start up: 
 
+1. On the Pi edit the rc.local file, which can be accessed using the following command: 
+
+``` sudo nano /etc/rc.local ```
+
+2. Add the file to be executed at the bottom of the page, but before the ```exit 0``` command. Here & is added at the end of the filename, as the script runs continously. 
+
+```python3 /home/pi/FermentationBox/main.py &```
+
+3. Make sure file is executeable. 
+```sudo chmod +x /etc/rc.local```
+
+4. Reboot system. 
+```sudo reboot```
+Now the program should start. 
 
 ![alt text](https://github.com/Wedenborg/FermentationBox/blob/main/preliminaryTestSetup.png)
