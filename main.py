@@ -42,10 +42,10 @@ def heatmatOFF(temp1,temp2):
 
     return
 
-def signalHumidifier(humid):
+def signalHumidifier(Humid):
     # Function that turns the humidifier on or off
     GPIO.output(Humid, GPIO.LOW)
-    sleep(1)
+    sleep(5)
     GPIO.output(Humid, GPIO.HIGH)
     return
 
@@ -57,7 +57,7 @@ try:
         
         humidity, temperature = Adafruit_DHT.read_retry(11, Sensor)
         f = open('/home/emilie/Desktop/Code/test.csv', 'a')
-        f.write(str(temperature) + ',' + str(humidity) + ',' + str(datetime.now().strftime("%H:%M:%S")) + '\n')
+        f.write(str(temperature) + ',' + str(humidity) + ',' + str(datetime.now().strftime("%H:%M:%S")) + str(humidifier)+','+'\n')
         f.close()
         print('Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temperature, humidity))
 
@@ -77,11 +77,11 @@ try:
 
 except KeyboardInterrupt:
     heatmatOFF(BlaaTemp,BrunTemp)
-    if humidity < 70:
+    if humidity < 70 and humidifier == True:
         signalHumidifier(Humid)
 
 except:
     heatmatOFF(BlaaTemp,BrunTemp)
-    if humidity < 70:
+    if humidity < 70 and humidifier == True:
         signalHumidifier(Humid)
 
