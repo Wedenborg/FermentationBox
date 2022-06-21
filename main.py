@@ -5,6 +5,7 @@ from datetime import datetime
 # Import sleep Module for timing
 from time import sleep
 
+
 # Define pins
 BlaaTemp = 22 
 BrunTemp = 23
@@ -51,15 +52,17 @@ def signalHumidifier(Humid):
 
 setup(BlaaTemp,BrunTemp,Humid,Sensor)
 
+K = 120
 try:
     humidifier = False
     while True:
         
         humidity, temperature = Adafruit_DHT.read_retry(11, Sensor)
         f = open('/home/emilie/Desktop/Code/test.csv', 'a')
-        f.write(str(temperature) + ',' + str(humidity) + ',' + str(datetime.now().strftime("%H:%M:%S")) + str(humidifier)+','+'\n')
+        f.write(str(temperature) + ',' + str(humidity) + ',' + str(datetime.now().strftime("%H:%M:%S")) + ','+str(humidifier)+'\n')
         f.close()
-        print('Temp={0:0.1f}*  Humidity={1:0.1f}%'.format(temperature, humidity))
+        humidifier = False
+
 
         if temperature < 30:
             heatmatON(BlaaTemp,BrunTemp)
@@ -67,13 +70,19 @@ try:
             heatmatOFF(BlaaTemp,BrunTemp)
         
         if humidity < 70 and humidifier == False:
-            signalHumidifier(Humid)
-            humidifier = True
-        elif humidity > 70 and humidifier == True:
-            signalHumidifier(Humid)
-            humidifier = False
+            if K >= 120:
+                K=0
+                signalHumidifier(Humid)
+                humidifier = True
+                sleep(20)
+                signalHumidifier(Humid)
 
-        sleep(120)
+        #elif humidity > 70 and humidifier == True:
+        #    signalHumidifier(Humid)
+        #    humidifier = False
+
+        sleep(10)
+        K += 10
 
 except KeyboardInterrupt:
     heatmatOFF(BlaaTemp,BrunTemp)
