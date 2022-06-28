@@ -52,7 +52,7 @@ def signalHumidifier(Humid):
 
 setup(BlaaTemp,BrunTemp,Humid,Sensor)
 
-K = 120
+K = 60
 try:
     humidifier = False
     while True:
@@ -70,7 +70,7 @@ try:
             heatmatOFF(BlaaTemp,BrunTemp)
         
         if humidity < 70 and humidifier == False:
-            if K >= 120:
+            if K >= 60:
                 K=0
                 signalHumidifier(Humid)
                 humidifier = True
