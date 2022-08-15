@@ -11,15 +11,15 @@ Fermentation box inspired by Noma Guide to Fermentation.
 * 1 4 relay module (2PH63083A)
 * 1 Heating mat
 * 1 Humidifier
+* 1 LCD display
+* 2 fans, one for the fermentation box and one for cooling hardware box
 * 1 USB B to USB micro cable (approx. 2m)
 * Wires 
 * perforated baking tray (approx. 40x30 cm)
 
 ### To be implemented: 
 
-* LCD display
-* Fan to distribute heat and humidity
-* More complicated/efficient control system
+* More efficient control system
 
 
 ### Modify rc.local to run on start up: 
@@ -33,10 +33,18 @@ Fermentation box inspired by Noma Guide to Fermentation.
 ```python3 /home/pi/FermentationBox/main.py &```
 
 3. Make sure file is executeable. 
+
 ```sudo chmod +x /etc/rc.local```
 
 4. Reboot system. 
+
 ```sudo reboot```
+
 Now the program should start. 
+
+
+### Setup:
+fritzing file also available. 
+Be aware of the gpio pins. The numbering varies between the code and the fritzing sketch.
 
 ![alt text](https://github.com/Wedenborg/FermentationBox/blob/main/preliminaryTestSetup.png)
