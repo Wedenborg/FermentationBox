@@ -9,17 +9,21 @@ Fermentation box inspired by Noma Guide to Fermentation.
 * 1 Raspberry pi power supply
 * 1 DHT11 sensor 
 * 1 4 relay module (2PH63083A)
-* 1 Heating mat
+* 1 Heating mat 
 * 1 Humidifier
 * 1 LCD display
 * 2 fans, one for the fermentation box and one for cooling hardware box
 * 1 USB B to USB micro cable (approx. 2m)
 * Wires 
 * perforated baking tray (approx. 40x30 cm)
+* 4 stands to lift the baking tray off the heating mat
 
 ### To be implemented: 
 
-* More efficient control system
+* More efficient control system -> It would be cool with a kalmanfilter or something! 
+
+### Known issues that I do not know how to solve: 
+* The humidifier turns on and off with a pulse signal. Sometimes something failes during start up, such that the humidifier is out of sync. \n I think I should replace the humidifier with one that has a real on/off switch and not just a pulse. 
 
 
 ### Modify rc.local to run on start up: 
